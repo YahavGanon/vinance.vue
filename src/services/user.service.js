@@ -31,7 +31,7 @@ function transferFunds(toId, amount) {
     user.transactions.push({
       toId,
       to: 'Moshiko', // Example value
-      at: Date.now(),
+      at: formatDate(new Date()), // Convert timestamp to "dd/mm/yyyy" format
       amount,
     })
     // Save updated user to localStorage
@@ -44,4 +44,11 @@ function transferFunds(toId, amount) {
 function getTransactions() {
   const user = getUser()
   return user.transactions
+}
+
+function formatDate(date) {
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const year = date.getFullYear()
+  return `${day}/${month}/${year}`
 }
